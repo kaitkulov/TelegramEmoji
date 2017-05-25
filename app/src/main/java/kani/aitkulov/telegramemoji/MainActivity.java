@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import kani.aitkulov.telegram_emoji.EmojiActions;
 
 
@@ -24,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < 100; i++)
+            list.add("\uD83D\uDE02\uD83D\uDE0D\uD83D\uDE18");
 
         emojiButton = (ImageView) findViewById(R.id.emoji_btn);
         submitButton = (ImageView) findViewById(R.id.submit_btn);
@@ -31,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         adapter = new EmojiAdapter();
+        adapter.addItems(list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         emojIconActions = new EmojiActions(this, findViewById(R.id.root_view), editText, emojiButton, 40);

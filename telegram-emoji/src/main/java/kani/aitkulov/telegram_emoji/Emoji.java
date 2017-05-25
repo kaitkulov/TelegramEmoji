@@ -52,6 +52,13 @@ public class Emoji {
     };
 
     static {
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < Emoji.splitCount; j++) {
+                Emoji.loadEmoji(i, j);
+            }
+    }
+
+    static {
         int emojiFullSize;
         int add = 2;
         if (AndroidUtilities.density <= 1.0f) {

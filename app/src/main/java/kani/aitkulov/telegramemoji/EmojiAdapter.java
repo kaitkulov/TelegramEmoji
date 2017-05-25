@@ -26,6 +26,11 @@ public class EmojiAdapter extends RecyclerView.Adapter<EmojiAdapter.ViewHolder> 
         notifyItemInserted(items.size());
     }
 
+    public void addItems(List<String> list) {
+        items.addAll(0, list);
+        notifyDataSetChanged();
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(parent.getContext())
