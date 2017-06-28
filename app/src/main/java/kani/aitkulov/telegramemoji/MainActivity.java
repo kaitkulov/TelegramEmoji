@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import kani.aitkulov.telegram_emoji.Emoji;
 import kani.aitkulov.telegram_emoji.EmojiActions;
 
 
@@ -49,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
                 adapter.addItem(editText.getText().toString());
                 editText.setText("");
                 recyclerView.scrollToPosition(adapter.getItemCount() - 1);
+            }
+        });
+
+        submitButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Emoji.release();
+                return true;
             }
         });
     }

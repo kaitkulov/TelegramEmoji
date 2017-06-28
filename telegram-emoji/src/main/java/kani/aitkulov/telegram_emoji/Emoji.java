@@ -51,10 +51,22 @@ public class Emoji {
             {8, 8, 8, 7}
     };
 
-    static {
+    public static void loadAll() {
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < Emoji.splitCount; j++) {
                 Emoji.loadEmoji(i, j);
+            }
+    }
+
+    public static void release() {
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < Emoji.splitCount; j++) {
+                if (emojiBmp[i][j] != null) {
+                    emojiBmp[i][j].recycle();
+                    emojiBmp[i][j] = null;
+                    loadingEmoji[i][j] = false;
+                    System.gc();
+                }
             }
     }
 
