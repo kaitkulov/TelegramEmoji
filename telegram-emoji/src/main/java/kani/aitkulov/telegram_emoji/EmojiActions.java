@@ -41,6 +41,7 @@ public class EmojiActions {
     int KeyBoardIcon = R.drawable.ic_keyboard_w;
     int SmileyIcons = R.drawable.ic_smile_w;
     KeyboardListener keyboardListener;
+    SoftKeyboardListener softKeyboardListener;
     private int innerTextChange;
 
     public EmojiActions(Context ctx, View rootView, EditText editText, ImageView emojiButton, int emojiSize) {
@@ -148,14 +149,18 @@ public class EmojiActions {
                         inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
                         changeEmojiKeyboardIcon(emojiButton, KeyBoardIcon);
                     }
+                    if(softKeyboardListener != null) {
+                        softKeyboardListener.onShownEmoji();
+                    }
                 }
 
                 //If popup is showing, simply dismiss it to show the undelying text keyboard
                 else {
+                    if(softKeyboardListener != null) {
+                        softKeyboardListener.onShownKeyboard();
+                    }
                     popup.dismiss();
                 }
-
-
             }
         });
 
@@ -177,9 +182,19 @@ public class EmojiActions {
 
         void onKeyboardClose();
     }
+    
+    public interface SoftKeyboardListener {
+        void onShownEmoji();
+        
+        void onShownKeyboard();
+    }
 
     public void setKeyboardListener(KeyboardListener listener) {
         this.keyboardListener = listener;
+    }
+    
+    public void setSoftKeyboardListener(SoftKeyboardListener listener) {
+        this.softKeyboardListener = listener;
     }
 
 }
